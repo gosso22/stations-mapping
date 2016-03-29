@@ -3,7 +3,7 @@ import React from 'react'
 import { Map, Marker, Popup, TileLayer } 
   from 'react-leaflet'
 
-class Map extends React.Component {
+class LeafletMap extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -16,4 +16,4 @@ class Map extends React.Component {
   }
 }
 
-export default Map
+export default LeafletMap
