@@ -1,4 +1,5 @@
 import React from 'react'
+import Map from './map'
 
 import Navbar 
   from 'react-bootstrap/lib/Navbar'
@@ -27,7 +28,7 @@ class App extends React.Component {
           <Grid>
             <Row className='show-grid'>
               <Col xs={12} md={8}>
-                Main area for map
+                <Map />
               </Col>
               <Col xs={6} md={4}>
                 Side panel
