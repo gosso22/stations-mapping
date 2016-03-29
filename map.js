@@ -1,33 +1,17 @@
 import React from 'react'
 
-import { GoogleMap, GoogleMapLoader } 
-  from 'react-google-maps'
+import { Map, Marker, Popup, TileLayer } 
+  from 'react-leaflet'
 
 class Map extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
+    const position = [51.505, -0.09]
     return (
-      <GoogleMapLoader
-        containerElement={
-          <div {...this.props}
-            style={{
-              height: '600px',
-            }} >
-          </div>
-        }
-        googleMapElement={
-          <GoogleMap
-            ref={(map) => console.log(map)}
-            defaultZoom={8}
-            defaultCenter={{ 
-              lat: -34.397, 
-              lng: 150.644 
-            }}
-          />
-        }
-      />
+      <Map center={position} zoom={13}>
+      </Map>
     )
   }
 }
