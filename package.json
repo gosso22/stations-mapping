@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify main.js -o public/bundle.js"
+  },
+  "browserify": {
+    "transform": [
+      ["babelify"]
+    ]
   },
   "repository": {
     "type": "git",
