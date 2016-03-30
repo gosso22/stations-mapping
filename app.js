@@ -11,9 +11,6 @@ import Col
   from 'react-bootstrap/lib/Col'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <div>
