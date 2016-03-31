@@ -5,7 +5,7 @@ import { Map, Marker, Popup, TileLayer }
 
 class LeafletMap extends React.Component {
   render() {
-    const position = [51.505, -0.09]
+    const position = [-6.00, 35.00]
     return (
       <Map center={position} zoom={13} style={{height: '600px'}}>
         <TileLayer

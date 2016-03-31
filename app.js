@@ -1,5 +1,6 @@
-import React from 'react'
-import Map from './map'
+import React     from 'react'
+import Map       from './map'
+import SidePanel from './sidepanel'
 
 import Navbar 
   from 'react-bootstrap/lib/Navbar'
@@ -28,7 +29,7 @@ class App extends React.Component {
                 <Map />
               </Col>
               <Col xs={6} md={4}>
-                Side panel
+                <SidePanel />
               </Col>
             </Row>
           </Grid>
