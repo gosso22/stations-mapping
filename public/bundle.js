@@ -213,10 +213,7 @@ var data = {
       id: 1,
       countryId: 1,
       name: 'Radio 5',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-3.381824, 36.705322],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -225,10 +222,7 @@ var data = {
       id: 2,
       countryId: 1,
       name: 'Radio React',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-3.908099, 31.629639],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -237,10 +231,7 @@ var data = {
       id: 3,
       countryId: 1,
       name: 'Radio Farm Radio',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-7.297088, 36.090088],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -249,10 +240,7 @@ var data = {
       id: 4,
       countryId: 2,
       name: 'Faraja FM',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-6.642783, 39.320068],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -261,10 +249,7 @@ var data = {
       id: 5,
       countryId: 3,
       name: 'Triple-A',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-10.466206, 36.485596],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -273,10 +258,7 @@ var data = {
       id: 6,
       countryId: 2,
       name: 'Radio Mario',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-7.580328, 32.640381],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -285,10 +267,7 @@ var data = {
       id: 7,
       countryId: 2,
       name: 'Radio Maria',
-      location: {
-        longitude: 0,
-        latitude: 0
-      },
+      position: [-1.515936, 32.728271],
       frequency: '',
       contacts: {},
       populationCoverage: 100
@@ -297,15 +276,18 @@ var data = {
   countries: {
     1: {
       id: 1,
-      name: 'Tanzania'
+      name: 'Tanzania',
+      position: [-6.00, 35.00]
     },
     2: {
       id: 2,
-      name: 'Ghana'
+      name: 'Ghana',
+      position: [7.946527, -1.023194]
     },
     3: {
       id: 3,
-      name: 'Uganda'
+      name: 'Uganda',
+      position: [1.373333, 32.290275]
     }
   }
 };
@@ -333,6 +315,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactLeaflet = require('react-leaflet');
 
+var _reactRedux = require('react-redux');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -353,7 +337,11 @@ var LeafletMap = function (_React$Component) {
   _createClass(LeafletMap, [{
     key: 'render',
     value: function render() {
-      var position = [-6.00, 35.00];
+      var _props = this.props;
+      var stations = _props.stations;
+      var countries = _props.countries;
+
+      var position = countries.selected ? countries.selected.position : [-6.00, 35.00];
       return _react2.default.createElement(
         'div',
         { style: { border: '1px solid red' } },
@@ -364,21 +352,23 @@ var LeafletMap = function (_React$Component) {
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           }),
-          _react2.default.createElement(
-            _reactLeaflet.Marker,
-            { position: position },
-            _react2.default.createElement(
-              _reactLeaflet.Popup,
-              null,
+          stations.visible.map(function (station, i) {
+            return _react2.default.createElement(
+              _reactLeaflet.Marker,
+              { key: i, position: station.position },
               _react2.default.createElement(
-                'span',
+                _reactLeaflet.Popup,
                 null,
-                'A pretty CSS3 popup.',
-                _react2.default.createElement('br', null),
-                'Easily customizable.'
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  'A pretty CSS3 popup.',
+                  _react2.default.createElement('br', null),
+                  'Easily customizable.'
+                )
               )
-            )
-          )
+            );
+          })
         )
       );
     }
@@ -387,9 +377,14 @@ var LeafletMap = function (_React$Component) {
   return LeafletMap;
 }(_react2.default.Component);
 
-exports.default = LeafletMap;
+exports.default = (0, _reactRedux.connect)(function (state) {
+  return {
+    stations: state.stations,
+    countries: state.countries
+  };
+})(LeafletMap);
 
-},{"react":506,"react-leaflet":196}],5:[function(require,module,exports){
+},{"react":506,"react-leaflet":196,"react-redux":341}],5:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

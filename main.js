@@ -83,14 +83,17 @@ const data = {
     1: {
       id: 1,
       name: 'Tanzania',
+      position: [-6.00, 35.00],
     },
     2: {
       id: 2,
       name: 'Ghana',
+      position: [7.946527, -1.023194],
     },
     3: {
       id: 3,
       name: 'Uganda',
+      position: [1.373333, 32.290275],
     },
   },
 }
