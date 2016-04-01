@@ -1,35 +1,48 @@
 import { combineReducers } from 'redux'
 
-function stations(state = {}, action) {
+const initialStations = {
+  all: {},
+  visible: [],
+}
+
+function stations(state = initialStations, action) {
   switch (action.type) {
     case 'INIT':
-      return action.data.stations
-    default:
-      return state
-  }
-}
-
-function countries(state = [], action) {
-  switch (action.type) {
-    case 'INIT':
-      return action.data.countries
-    case 'ADD_COUNTRY':
-      return [...state, action.country]
-    default:
-      return state
-  }
-}
-
-const initialUserSelection = {
-  country: {name: 'NO COUNTRY SELECTED'}
-}
-
-function userSelection(state = initialUserSelection, action) {
-  switch (action.type) {
+      return {
+        ...state,
+        all: action.data.stations,
+      }
     case 'SELECT_COUNTRY':
       return {
         ...state,
-        country: { name: action.id },
+        visible: Object.keys(state.all)
+          .map(key => state.all[key])
+          .filter(station => station.countryId == action.id)
+      }
+    default:
+      return state
+  }
+}
+
+const initialCountries = {
+  all: {},
+  list: [],
+  selected: null,
+}
+
+function countries(state = initialCountries, action) {
+  switch (action.type) {
+    case 'INIT':
+      const { countries } = action.data
+      return {
+        ...state,
+        all: countries,
+        list: Object.keys(countries).map(key => countries[key])
+      }
+    case 'SELECT_COUNTRY':
+      return {
+        ...state,
+        selected: state.all[action.id],
       }
     default:
       return state
@@ -39,5 +52,4 @@ function userSelection(state = initialUserSelection, action) {
 export default combineReducers({
   countries,
   stations,
-  userSelection,
 })
