@@ -16,6 +16,8 @@ const store = createStore(reducers)
 const data = {
   stations: {
     1: {
+      id: 1,
+      countryId: 1,
       name: 'Radio 5',
       location: {
         longitude: 0,
@@ -26,6 +28,8 @@ const data = {
       populationCoverage: 100,
     },
     2: {
+      id: 2,
+      countryId: 1,
       name: 'Radio React',
       location: {
         longitude: 0,
@@ -36,6 +40,8 @@ const data = {
       populationCoverage: 100,
     },
     3: {
+      id: 3,
+      countryId: 1,
       name: 'Radio Farm Radio',
       location: {
         longitude: 0,
@@ -46,6 +52,8 @@ const data = {
       populationCoverage: 100,
     },
     4: {
+      id: 4,
+      countryId: 2,
       name: 'Faraja FM',
       location: {
         longitude: 0,
@@ -56,6 +64,8 @@ const data = {
       populationCoverage: 100,
     },
     5: {
+      id: 5,
+      countryId: 3,
       name: 'Triple-A',
       location: {
         longitude: 0,
@@ -66,6 +76,8 @@ const data = {
       populationCoverage: 100,
     },
     6: {
+      id: 6,
+      countryId: 2,
       name: 'Radio Mario',
       location: {
         longitude: 0,
@@ -76,6 +88,8 @@ const data = {
       populationCoverage: 100,
     },
     7: {
+      id: 7,
+      countryId: 2,
       name: 'Radio Maria',
       location: {
         longitude: 0,
@@ -86,23 +100,20 @@ const data = {
       populationCoverage: 100,
     },
   },
-  countries: [
-    {
+  countries: {
+    1: {
       id: 1,
       name: 'Tanzania',
-      stations: [1, 2, 3, 4],
     },
-    {
+    2: {
       id: 2,
       name: 'Ghana',
-      stations: [5, 6],
     },
-    {
+    3: {
       id: 3,
       name: 'Uganda',
-      stations: [7],
     },
-  ]
+  },
 }
 
 store.dispatch(init(data))

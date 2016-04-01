@@ -12,13 +12,16 @@ import { connect }
 
 class SidePanel extends React.Component {
   render() {
-    const { country } = this.props
+    const { countries, stations } = this.props
+    if (!countries.selected) {
+      return <span />
+    }
     return (
-      <Panel collapsible defaultExpanded header={country.name}>
+      <Panel collapsible defaultExpanded header={countries.selected.name}>
         <ListGroup fill>
-          <ListGroupItem>Item 1</ListGroupItem>
-          <ListGroupItem>Item 2</ListGroupItem>
-          <ListGroupItem>&hellip;</ListGroupItem>
+          {stations.visible.map((station, i) => (
+            <ListGroupItem key={i}>{station.name}</ListGroupItem>
+          ))}
         </ListGroup>
       </Panel>
     )
@@ -26,6 +29,6 @@ class SidePanel extends React.Component {
 }
 
 export default connect(state => ({
-  country: state.userSelection.country,
+  countries: state.countries,
+  stations: state.stations,
 }))(SidePanel)
-

@@ -23,9 +23,6 @@ import Col
   from 'react-bootstrap/lib/Col'
 
 class App extends React.Component {
-  handleSelect(e) {
-    console.log(e)
-  }
   render() {
     const { countries, dispatch } = this.props
     return (
@@ -42,7 +39,7 @@ class App extends React.Component {
                 eventKey = {3} 
                 title    = 'Countries' 
                 id       = 'basic-nav-dropdown'>
-                {countries.map((country, i) => (
+                {countries.list.map((country, i) => (
                   <MenuItem 
                     key      = {i} 
                     onSelect = {() => dispatch(selectCountry(country.id))}
