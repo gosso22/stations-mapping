@@ -7,6 +7,7 @@ class LeafletMap extends React.Component {
   render() {
     const position = [-6.00, 35.00]
     return (
+      <div style={{border: '1px solid red'}}>
       <Map center={position} zoom={6} style={{height: '600px'}}>
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
@@ -18,6 +19,7 @@ class LeafletMap extends React.Component {
           </Popup>
         </Marker>
       </Map>
+      </div>
     )
   }
 }

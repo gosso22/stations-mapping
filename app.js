@@ -2,6 +2,9 @@ import React     from 'react'
 import Map       from './map'
 import SidePanel from './sidepanel'
 
+import { connect } 
+  from 'react-redux'
+
 import Nav
   from 'react-bootstrap/lib/Nav'
 import Navbar 
@@ -19,6 +22,7 @@ import Col
 
 class App extends React.Component {
   render() {
+    const { countries } = this.props
     return (
       <div>
         <Navbar inverse fluid fixedTop>
@@ -30,9 +34,13 @@ class App extends React.Component {
           <Navbar.Collapse>
             <Nav>
               <NavDropdown eventKey={3} title='Countries' id='basic-nav-dropdown'>
-                <MenuItem eventKey={3.1}>Tanzania</MenuItem>
-                <MenuItem eventKey={3.2}>Ghana</MenuItem>
-                <MenuItem eventKey={3.3}>Uganda</MenuItem>
+                {countries.map((country, i) => (
+                  <MenuItem 
+                    key      = {i} 
+                    eventKey = {`3.${i}`}>
+                    {country.name}
+                  </MenuItem>
+                ))}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -54,4 +62,7 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default connect(state => ({
+  countries: state.countries
+}))(App)
+

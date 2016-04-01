@@ -1,83 +1,37 @@
-import React from 'react'
+import React    from 'react'
 import ReactDOM from 'react-dom'
-import App from './app'
+import App      from './app'
+import reducers from './reducers'
 
-const stationsData = {
-  stations: [
+import { init }
+  from './actions'
+import { createStore } 
+  from 'redux'
+import { Provider } 
+  from 'react-redux'
+
+const store = createStore(reducers)
+
+// Will come from data store
+const data = {
+  countries: [
     {
-      name: 'Radio 5',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
+      name: 'Tanzania',
     },
     {
-      name: 'Radio React',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
+      name: 'Ghana',
     },
     {
-      name: 'Radio Farm Radio',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
+      name: 'Uganda',
     },
-    {
-      name: 'Faraja FM',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
-    },
-    {
-      name: 'Triple-A',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
-    },
-    {
-      name: 'Radio Mario',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
-    },
-    {
-      name: 'Radio Maria',
-      location: {
-        longitude: 0,
-        latitude: 0,
-      },
-      frequency: '',
-      contacts: {},
-      populationCoverage: 100,
-    },
-  ],
+  ]
 }
 
+store.dispatch(init(data))
+
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('main')
 )
