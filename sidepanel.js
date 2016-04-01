@@ -7,10 +7,14 @@ import ListGroup
 import ListGroupItem
   from 'react-bootstrap/lib/ListGroupItem'
 
+import { connect } 
+  from 'react-redux'
+
 class SidePanel extends React.Component {
   render() {
+    const { country } = this.props
     return (
-      <Panel collapsible defaultExpanded header='Tanzania'>
+      <Panel collapsible defaultExpanded header={country.name}>
         <ListGroup fill>
           <ListGroupItem>Item 1</ListGroupItem>
           <ListGroupItem>Item 2</ListGroupItem>
@@ -21,4 +25,7 @@ class SidePanel extends React.Component {
   }
 }
 
-export default SidePanel
+export default connect(state => ({
+  country: state.userSelection.country,
+}))(SidePanel)
+

@@ -5,3 +5,8 @@ export function init(data) {
   }
 }
 
+export function selectCountry(id) {
+  return {
+    type: 'SELECT_COUNTRY', id
+  }
+}

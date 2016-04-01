@@ -4,6 +4,8 @@ import SidePanel from './sidepanel'
 
 import { connect } 
   from 'react-redux'
+import { selectCountry }
+  from './actions'
 
 import Nav
   from 'react-bootstrap/lib/Nav'
@@ -21,8 +23,11 @@ import Col
   from 'react-bootstrap/lib/Col'
 
 class App extends React.Component {
+  handleSelect(e) {
+    console.log(e)
+  }
   render() {
-    const { countries } = this.props
+    const { countries, dispatch } = this.props
     return (
       <div>
         <Navbar inverse fluid fixedTop>
@@ -33,10 +38,14 @@ class App extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavDropdown eventKey={3} title='Countries' id='basic-nav-dropdown'>
+              <NavDropdown 
+                eventKey = {3} 
+                title    = 'Countries' 
+                id       = 'basic-nav-dropdown'>
                 {countries.map((country, i) => (
                   <MenuItem 
                     key      = {i} 
+                    onSelect = {() => dispatch(selectCountry(country.id))}
                     eventKey = {`3.${i}`}>
                     {country.name}
                   </MenuItem>

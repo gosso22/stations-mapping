@@ -5,9 +5,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.init = init;
+exports.selectCountry = selectCountry;
 function init(data) {
   return {
     type: 'INIT', data: data
+  };
+}
+
+function selectCountry(id) {
+  return {
+    type: 'SELECT_COUNTRY', id: id
   };
 }
 
@@ -33,6 +40,8 @@ var _sidepanel = require('./sidepanel');
 var _sidepanel2 = _interopRequireDefault(_sidepanel);
 
 var _reactRedux = require('react-redux');
+
+var _actions = require('./actions');
 
 var _Nav = require('react-bootstrap/lib/Nav');
 
@@ -80,9 +89,16 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: 'handleSelect',
+    value: function handleSelect(e) {
+      console.log(e);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var countries = this.props.countries;
+      var _props = this.props;
+      var countries = _props.countries;
+      var dispatch = _props.dispatch;
 
       return _react2.default.createElement(
         'div',
@@ -111,12 +127,18 @@ var App = function (_React$Component) {
               null,
               _react2.default.createElement(
                 _NavDropdown2.default,
-                { eventKey: 3, title: 'Countries', id: 'basic-nav-dropdown' },
+                {
+                  eventKey: 3,
+                  title: 'Countries',
+                  id: 'basic-nav-dropdown' },
                 countries.map(function (country, i) {
                   return _react2.default.createElement(
                     _MenuItem2.default,
                     {
                       key: i,
+                      onSelect: function onSelect() {
+                        return dispatch((0, _actions.selectCountry)(country.id));
+                      },
                       eventKey: '3.' + i },
                     country.name
                   );
@@ -160,7 +182,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
   };
 })(App);
 
-},{"./map":4,"./sidepanel":519,"react":506,"react-bootstrap/lib/Col":9,"react-bootstrap/lib/Grid":14,"react-bootstrap/lib/MenuItem":17,"react-bootstrap/lib/Nav":18,"react-bootstrap/lib/NavDropdown":20,"react-bootstrap/lib/Navbar":21,"react-bootstrap/lib/Row":27,"react-redux":341}],3:[function(require,module,exports){
+},{"./actions":1,"./map":4,"./sidepanel":519,"react":506,"react-bootstrap/lib/Col":9,"react-bootstrap/lib/Grid":14,"react-bootstrap/lib/MenuItem":17,"react-bootstrap/lib/Nav":18,"react-bootstrap/lib/NavDropdown":20,"react-bootstrap/lib/Navbar":21,"react-bootstrap/lib/Row":27,"react-redux":341}],3:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -191,18 +213,94 @@ var store = (0, _redux.createStore)(_reducers2.default);
 
 // Will come from data store
 var data = {
+  stations: {
+    1: {
+      name: 'Radio 5',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    2: {
+      name: 'Radio React',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    3: {
+      name: 'Radio Farm Radio',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    4: {
+      name: 'Faraja FM',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    5: {
+      name: 'Triple-A',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    6: {
+      name: 'Radio Mario',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    },
+    7: {
+      name: 'Radio Maria',
+      location: {
+        longitude: 0,
+        latitude: 0
+      },
+      frequency: '',
+      contacts: {},
+      populationCoverage: 100
+    }
+  },
   countries: [{
-    name: 'Tanzania'
+    id: 1,
+    name: 'Tanzania',
+    stations: [1, 2, 3, 4]
   }, {
-    name: 'Ghana'
+    id: 2,
+    name: 'Ghana',
+    stations: [5, 6]
   }, {
-    name: 'Uganda'
+    id: 3,
+    name: 'Uganda',
+    stations: [7]
   }]
 };
 
-window.setTimeout(function () {
-  store.dispatch((0, _actions.init)(data));
-}, 3000);
+store.dispatch((0, _actions.init)(data));
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,
@@ -44390,80 +44488,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _redux = require('redux');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var initialStationsState = [{
-  name: 'Radio 5',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Radio React',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Radio Farm Radio',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Faraja FM',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Triple-A',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Radio Mario',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}, {
-  name: 'Radio Maria',
-  location: {
-    longitude: 0,
-    latitude: 0
-  },
-  frequency: '',
-  contacts: {},
-  populationCoverage: 100
-}];
-
 function stations() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? initialStationsState : arguments[0];
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
   switch (action.type) {
+    case 'INIT':
+      return action.data.stations;
     default:
       return state;
   }
@@ -44483,9 +44520,28 @@ function countries() {
   }
 }
 
+var initialUserSelection = {
+  country: { name: 'NO COUNTRY SELECTED' }
+};
+
+function userSelection() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? initialUserSelection : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'SELECT_COUNTRY':
+      return _extends({}, state, {
+        country: { name: action.id }
+      });
+    default:
+      return state;
+  }
+}
+
 exports.default = (0, _redux.combineReducers)({
+  countries: countries,
   stations: stations,
-  countries: countries
+  userSelection: userSelection
 });
 
 },{"redux":512}],519:[function(require,module,exports){
@@ -44513,6 +44569,8 @@ var _ListGroupItem = require('react-bootstrap/lib/ListGroupItem');
 
 var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
 
+var _reactRedux = require('react-redux');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44533,9 +44591,11 @@ var SidePanel = function (_React$Component) {
   _createClass(SidePanel, [{
     key: 'render',
     value: function render() {
+      var country = this.props.country;
+
       return _react2.default.createElement(
         _Panel2.default,
-        { collapsible: true, defaultExpanded: true, header: 'Tanzania' },
+        { collapsible: true, defaultExpanded: true, header: country.name },
         _react2.default.createElement(
           _ListGroup2.default,
           { fill: true },
@@ -44562,6 +44622,10 @@ var SidePanel = function (_React$Component) {
   return SidePanel;
 }(_react2.default.Component);
 
-exports.default = SidePanel;
+exports.default = (0, _reactRedux.connect)(function (state) {
+  return {
+    country: state.userSelection.country
+  };
+})(SidePanel);
 
-},{"react":506,"react-bootstrap/lib/ListGroup":15,"react-bootstrap/lib/ListGroupItem":16,"react-bootstrap/lib/Panel":26}]},{},[3]);
+},{"react":506,"react-bootstrap/lib/ListGroup":15,"react-bootstrap/lib/ListGroupItem":16,"react-bootstrap/lib/Panel":26,"react-redux":341}]},{},[3]);

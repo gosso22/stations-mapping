@@ -1,80 +1,9 @@
 import { combineReducers } from 'redux'
 
-const initialStationsState = [
-  {
-    name: 'Radio 5',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Radio React',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Radio Farm Radio',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Faraja FM',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Triple-A',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Radio Mario',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-  {
-    name: 'Radio Maria',
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
-    frequency: '',
-    contacts: {},
-    populationCoverage: 100,
-  },
-]
-
-function stations(state = initialStationsState, action) {
+function stations(state = {}, action) {
   switch (action.type) {
+    case 'INIT':
+      return action.data.stations
     default:
       return state
   }
@@ -91,7 +20,24 @@ function countries(state = [], action) {
   }
 }
 
+const initialUserSelection = {
+  country: {name: 'NO COUNTRY SELECTED'}
+}
+
+function userSelection(state = initialUserSelection, action) {
+  switch (action.type) {
+    case 'SELECT_COUNTRY':
+      return {
+        ...state,
+        country: { name: action.id },
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  stations,
   countries,
+  stations,
+  userSelection,
 })
