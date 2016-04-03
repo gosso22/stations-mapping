@@ -6,14 +6,30 @@ import { connect }
   from 'react-redux'
 
 class LeafletMap extends React.Component {
-  render() {
+  getMapProps() {
     const { stations, countries } = this.props
-    const position = countries.selected 
-      ? countries.selected.position
-      : [-6.00, 35.00]
+    if (stations.selected) {
+      return {
+        center: stations.selected.position,
+        zoom: 12,
+      }
+    } else if (countries.selected) {
+      return {
+        center: countries.selected.position, 
+        zoom: 6,
+      }
+    } else {
+      return {
+        center: [-6.00, 35.00],
+        zoom: 6,
+      }
+    }
+  }
+  render() {
+    const { stations } = this.props
+    const mapProps = this.getMapProps()
     return (
-      <div style={{border: '1px solid red'}}>
-      <Map center={position} zoom={6} style={{height: '600px'}}>
+      <Map {...mapProps} style={{height: '100%'}}>
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -21,12 +37,11 @@ class LeafletMap extends React.Component {
         {stations.visible.map((station, i) => (
           <Marker key={i} position={station.position}>
             <Popup>
-              <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
+              <span>{station.name}</span>
             </Popup>
           </Marker>
         ))}
       </Map>
-      </div>
     )
   }
 }

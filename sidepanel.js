@@ -6,24 +6,65 @@ import ListGroup
   from 'react-bootstrap/lib/ListGroup'
 import ListGroupItem
   from 'react-bootstrap/lib/ListGroupItem'
+import Table
+  from 'react-bootstrap/lib/Table'
 
 import { connect } 
   from 'react-redux'
+import { selectStation }
+  from './actions'
 
 class SidePanel extends React.Component {
   render() {
-    const { countries, stations } = this.props
+    const { countries, stations, dispatch, ...props } = this.props
     if (!countries.selected) {
       return <span />
     }
     return (
-      <Panel collapsible defaultExpanded header={countries.selected.name}>
-        <ListGroup fill>
-          {stations.visible.map((station, i) => (
-            <ListGroupItem key={i}>{station.name}</ListGroupItem>
-          ))}
-        </ListGroup>
-      </Panel>
+      <div {...props}>
+        <Panel 
+          bsStyle = 'info'
+          header  = {countries.selected.name}>
+          <ListGroup fill>
+            {stations.visible.map((station, i) => 
+              stations.selected && stations.selected.id == station.id ? (
+                <ListGroupItem 
+                  key     = {i}
+                  bsStyle = {'success'}>
+                  {station.name}
+                </ListGroupItem>
+              ) : (
+                <ListGroupItem 
+                  key     = {i}
+                  onClick = {e => dispatch(selectStation(station.id))}>
+                  {station.name}
+                </ListGroupItem>
+              )
+            )}
+          </ListGroup>
+        </Panel>
+        {stations.selected && (
+          <Panel 
+            bsStyle = 'success'
+            header  = {stations.selected.name}>
+            <p>
+              You'll have to make the call there. I've been able to actually use it in production in certain scenarios already.
+            </p>
+            <Table fill striped bordered condensed>
+              <tbody>
+                <tr>
+                  <td style={{paddingLeft: '16px'}}>Frequency</td>
+                  <td>{stations.selected.frequency}</td>
+                </tr>
+                <tr>
+                  <td style={{paddingLeft: '16px'}}>Population coverage</td>
+                  <td>{stations.selected.populationCoverage}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Panel>
+        )}
+      </div>
     )
   }
 }
