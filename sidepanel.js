@@ -24,7 +24,7 @@ class SidePanel extends React.Component {
       <div {...props}>
         <Panel 
           bsStyle = 'info'
-          header  = {countries.selected.name}>
+          header  = {<span>{countries.selected.name}</span>}>
           <ListGroup fill>
             {stations.visible.map((station, i) => 
               stations.selected && stations.selected.id == station.id ? (
@@ -45,10 +45,16 @@ class SidePanel extends React.Component {
         </Panel>
         {stations.selected && (
           <Panel 
-            bsStyle = 'success'
-            header  = {stations.selected.name}>
-            <p>
-              You'll have to make the call there. I've been able to actually use it in production in certain scenarios already.
+            bsStyle = 'primary'
+            header  = {(
+              <span>
+                <a href='#' onClick={e => dispatch(selectStation(null))} style={{float: 'right'}}>
+                  close
+                </a>
+                {stations.selected.name}
+              </span>)}>
+            <p style={{marginBottom: 0}}>
+              Here goes a short description text for the selected radio station.
             </p>
             <Table fill striped bordered condensed>
               <tbody>

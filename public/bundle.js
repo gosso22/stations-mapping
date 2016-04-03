@@ -44642,7 +44642,11 @@ var SidePanel = function (_React$Component) {
           _Panel2.default,
           {
             bsStyle: 'info',
-            header: countries.selected.name },
+            header: _react2.default.createElement(
+              'span',
+              null,
+              countries.selected.name
+            ) },
           _react2.default.createElement(
             _ListGroup2.default,
             { fill: true },
@@ -44668,12 +44672,23 @@ var SidePanel = function (_React$Component) {
         stations.selected && _react2.default.createElement(
           _Panel2.default,
           {
-            bsStyle: 'success',
-            header: stations.selected.name },
+            bsStyle: 'primary',
+            header: _react2.default.createElement(
+              'span',
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: '#', onClick: function onClick(e) {
+                    return dispatch((0, _actions.selectStation)(null));
+                  }, style: { float: 'right' } },
+                'close'
+              ),
+              stations.selected.name
+            ) },
           _react2.default.createElement(
             'p',
-            null,
-            'You\'ll have to make the call there. I\'ve been able to actually use it in production in certain scenarios already.'
+            { style: { marginBottom: 0 } },
+            'Here goes a short description text for the selected radio station.'
           ),
           _react2.default.createElement(
             _Table2.default,
