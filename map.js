@@ -5,6 +5,14 @@ import { Map, Marker, Popup, TileLayer }
 import { connect }
   from 'react-redux'
 
+const styles = {
+  map: {
+    'position' : 'fixed',
+    'width'    : '100%',
+    'height'   : '100%',
+  },
+}
+
 class LeafletMap extends React.Component {
   getMapProps() {
     const { stations, countries } = this.props
@@ -29,7 +37,7 @@ class LeafletMap extends React.Component {
     const { stations } = this.props
     const mapProps = this.getMapProps()
     return (
-      <Map {...mapProps} style={{height: '100%'}}>
+      <Map {...mapProps} style={styles.map}>
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

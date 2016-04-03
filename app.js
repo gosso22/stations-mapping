@@ -22,7 +22,7 @@ const styles = {
     'right'    : '30px',
     'top'      : '80px',
     'width'    : '300px',
-    'zIndex'   : 1,
+    'zIndex'   : 8000,
   },
 }
 

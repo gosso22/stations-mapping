@@ -80,7 +80,7 @@ var styles = {
     'right': '30px',
     'top': '80px',
     'width': '300px',
-    'zIndex': 1
+    'zIndex': 8000
   }
 };
 
@@ -316,6 +316,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var styles = {
+  map: {
+    'position': 'fixed',
+    'width': '100%',
+    'height': '100%'
+  }
+};
+
 var LeafletMap = function (_React$Component) {
   _inherits(LeafletMap, _React$Component);
 
@@ -357,7 +365,7 @@ var LeafletMap = function (_React$Component) {
       var mapProps = this.getMapProps();
       return _react2.default.createElement(
         _reactLeaflet.Map,
-        _extends({}, mapProps, { style: { height: '100%' } }),
+        _extends({}, mapProps, { style: styles.map }),
         _react2.default.createElement(_reactLeaflet.TileLayer, {
           url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
           attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
