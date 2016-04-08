@@ -15,18 +15,22 @@ import NavDropdown
   from 'react-bootstrap/lib/NavDropdown'
 import MenuItem
   from 'react-bootstrap/lib/MenuItem'
-import Grid
-  from 'react-bootstrap/lib/Grid'
-import Row
-  from 'react-bootstrap/lib/Row'
-import Col
-  from 'react-bootstrap/lib/Col'
+
+const styles = {
+  panel: {
+    'position' : 'absolute',
+    'right'    : '30px',
+    'top'      : '80px',
+    'width'    : '300px',
+    'zIndex'   : 8000,
+  },
+}
 
 class App extends React.Component {
   render() {
     const { countries, dispatch } = this.props
     return (
-      <div>
+      <div style={{height: '100%', paddingTop: '60px'}}>
         <Navbar inverse fluid fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
@@ -51,17 +55,9 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div style={{marginTop: '80px'}}>
-          <Grid>
-            <Row className='show-grid'>
-              <Col xs={12} md={8}>
-                <Map />
-              </Col>
-              <Col xs={6} md={4}>
-                <SidePanel />
-              </Col>
-            </Row>
-          </Grid>
+        <div style={{height: '100%'}}>
+          <SidePanel style={styles.panel} />
+          <Map />
         </div>
       </div>
     )

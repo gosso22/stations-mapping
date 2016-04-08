@@ -10,3 +10,10 @@ export function selectCountry(id) {
     type: 'SELECT_COUNTRY', id
   }
 }
+
+export function selectStation(id) {
+  return {
+    type: 'SELECT_STATION', id
+  }
+}
+
